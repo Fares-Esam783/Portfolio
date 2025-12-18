@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if ((saved && saved === "dark") || (!saved && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <title>
+      {% block title %}Fares Essam - Full Stack Developer{% endblock %}
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .progress-bar {
+        animation: fill 1.5s ease-out forwards;
+      }
+      @keyframes fill {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      .animated-gradient {
+        background: linear-gradient(-45deg, #1e3a8a, #2563eb, #9333ea, #06b6d4);
+        background-size: 400% 400%;
+        animation: gradientShift 16s ease infinite;
+      }
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.3;
+      }
+      .blob-1 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(147, 51, 234, 0.6) 0%,
+          rgba(147, 51, 234, 0) 60%
+        );
+        animation: floatA 10s ease-in-out infinite;
+        top: -40px;
+        left: -60px;
+      }
+      .blob-2 {
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(
+          circle,
+          rgba(37, 99, 235, 0.6) 0%,
+          rgba(37, 99, 235, 0) 60%
+        );
+        animation: floatB 12s ease-in-out infinite;
+        bottom: -60px;
+        right: -40px;
+      }
+      @keyframes floatA {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-12px) translateX(8px);
+        }
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+      }
+      @keyframes floatB {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(10px) translateX(-6px);
+        }
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+        background-color: #ffffff;
+        color: #111827;
+        transition: all 0.2s ease;
+      }
+      .dark input,
+      .dark textarea,
+      .dark select {
+        background-color: #111827;
+        color: #e5e7eb;
+        border-color: #374151;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        outline: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 flex flex-col min-h-screen transition-colors duration-300"
+  >
+    <!-- Navbar -->
+    <nav
+      x-data="{ scrolled: false, dark: false }"
+      x-init="dark = localStorage.getItem('theme') === 'dark';
+                 if (dark) document.documentElement.classList.add('dark');
+                 window.addEventListener('scroll', () => scrolled = window.scrollY > 10)"
+      :class="scrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md' : 'bg-white dark:bg-gray-900'"
+      class="transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <a
+                href="{% url 'home' %}"
+                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
+                >Fares Essam</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center md:hidden">
+            <button
+              id="nav-toggle"
+              class="p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+          <div class="hidden md:flex items-center space-x-4">
+            <a
+              href="{% url 'home' %}"
+              class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+              >Home</a
+            >
+            <a
+              href="{% if request.path == '/' %}#about-preview{% else %}{% url 'about' %}{% endif %}"
+              class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+              >About</a
+            >
+            <a
+              href="{% if request.path == '/' %}#projects-preview{% else %}{% url 'projects' %}{% endif %}"
+              class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+              >Projects</a
+            >
+            <a
+              href="{% if request.path == '/' %}#contact-preview{% else %}{% url 'contact' %}{% endif %}"
+              class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+              >Contact</a
+            >
+            <a
+              href="{% url 'cv_download' %}"
+              class="ml-2 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-bold transition"
+              >Download CV</a
+            >
+            <button
+              @click="document.documentElement.classList.toggle('dark'); dark = !dark; localStorage.setItem('theme', dark ? 'dark' : 'light')"
+              class="ml-3 px-3 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <i :class="dark ? 'fas fa-moon' : 'fas fa-sun'"></i>
+            </button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+          <a
+            href="{% url 'home' %}"
+            class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
+            >Home</a
+          >
+          <a
+            href="{% url 'about' %}"
+            class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
+            >About</a
+          >
+          <a
+            href="{% url 'projects' %}"
+            class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
+            >Projects</a
+          >
+          <a
+            href="{% url 'contact' %}"
+            class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
+            >Contact</a
+          >
+          <a
+            href="{% url 'cv_download' %}"
+            class="block px-3 py-2 mt-1 text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+            >Download CV</a
+          >
+          <button
+            @click="document.documentElement.classList.toggle('dark'); dark = !dark; localStorage.setItem('theme', dark ? 'dark' : 'light')"
+            class="mt-2 block w-full px-3 py-2 rounded-md text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            <i :class="dark ? 'fas fa-moon' : 'fas fa-sun'"></i> Toggle Theme
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      {% if messages %}
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        {% for message in messages %}
+        <div
+          class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg"
+          role="alert"
+        >
+          {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gray-800 dark:bg-gray-900 text-white dark:text-gray-100 mt-auto transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <p class="text-lg font-bold">Fares Essam</p>
+            <p class="text-gray-400 dark:text-gray-300">
+              Full Stack Web Developer
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a
+              href="https://github.com/Fares-Esam783"
+              target="_blank"
+              rel="noopener"
+              class="text-gray-400 dark:text-gray-300 hover:text-white"
+              ><i class="fab fa-github fa-lg"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/fares-esam-a38172343/"
+              target="_blank"
+              rel="noopener"
+              class="text-gray-400 dark:text-gray-300 hover:text-white"
+              ><i class="fab fa-linkedin fa-lg"></i
+            ></a>
+            <a
+              href="mailto:faresesam7589@gmail.com"
+              class="text-gray-400 dark:text-gray-300 hover:text-white"
+              ><i class="fas fa-envelope fa-lg"></i
+            ></a>
+            <a
+              href="https://wa.me/01210806085"
+              target="_blank"
+              rel="noopener"
+              class="text-gray-400 dark:text-gray-300 hover:text-white"
+              ><i class="fab fa-whatsapp fa-lg"></i
+            ></a>
+          </div>
+        </div>
+        <div class="mt-8 text-center text-gray-500 dark:text-gray-400 text-sm">
+          &copy; {% now "Y" %} Fares Essam. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <script>
+      const t = document.getElementById("nav-toggle");
+      const m = document.getElementById("mobile-menu");
+      if (t && m) {
+        t.addEventListener("click", () => {
+          m.classList.toggle("hidden");
+        });
+      }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 800,
+        easing: "ease-out-quart",
+      });
+    </script>
+  </body>
+</html>
