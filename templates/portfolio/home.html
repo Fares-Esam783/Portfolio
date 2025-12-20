@@ -244,25 +244,27 @@
             src="{{ project.image.url }}"
             alt="{{ project.title }}"
             class="w-full h-48 object-cover"
+            loading="lazy"
+            decoding="async"
           />
           <div
             class="absolute inset-0 h-48 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
           >
             <div class="text-white text-center space-x-4">
               {% if project.github_link %}
-              <a
-                href="{{ project.github_link }}"
-                target="_blank"
-                class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
-              >
+            <a
+              href="{{ project.github_link }}"
+              target="_blank"
+              class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
+            >
                 <i class="fab fa-github mr-2"></i>Code
               </a>
               {% endif %} {% if project.live_link %}
-              <a
-                href="{{ project.live_link }}"
-                target="_blank"
-                class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
-              >
+            <a
+              href="{{ project.live_link }}"
+              target="_blank"
+              class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
+            >
                 <i class="fas fa-external-link-alt mr-2"></i>Live
               </a>
               {% endif %}

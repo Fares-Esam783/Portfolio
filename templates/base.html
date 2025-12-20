@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,17 +20,25 @@
     <title>
       {% block title %}Fares Essam - Full Stack Developer{% endblock %}
     </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-      };
-    </script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+        rel="stylesheet"
+    /></noscript>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -152,10 +161,8 @@
   >
     <!-- Navbar -->
     <nav
-      x-data="{ scrolled: false, dark: false }"
-      x-init="dark = localStorage.getItem('theme') === 'dark';
-                 if (dark) document.documentElement.classList.add('dark');
-                 window.addEventListener('scroll', () => scrolled = window.scrollY > 10)"
+      x-data="{ scrolled: false, dark: document.documentElement.classList.contains('dark') }"
+      x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 10)"
       :class="scrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md' : 'bg-white dark:bg-gray-900'"
       class="transition-colors duration-300"
     >
@@ -319,12 +326,15 @@
         });
       }
     </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init({
-        once: true,
-        duration: 800,
-        easing: "ease-out-quart",
+      window.addEventListener("load", () => {
+        if (!window.AOS) return;
+        AOS.init({
+          once: true,
+          duration: 800,
+          easing: "ease-out-quart",
+        });
       });
     </script>
   </body>
