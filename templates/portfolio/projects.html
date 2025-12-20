@@ -1,39 +1,53 @@
 {% extends 'base.html' %} {% block content %}
-<div class="py-12 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
+<!-- Projects Hero Section -->
+<section
+  class="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h1
+        class="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6"
+      >
         My Projects
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-300">
-        A selection of my recent work and personal projects.
+      <p
+        class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+      >
+        A selection of my recent work and personal projects showcasing my skills
+        in full-stack development.
       </p>
     </div>
+  </div>
+</section>
 
+<!-- Projects Grid Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {% for project in projects %}
       <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-soft hover:shadow-large overflow-hidden transition-all card-hover border border-gray-100 dark:border-gray-700 flex flex-col"
         data-aos="fade-up"
+        data-aos-delay="100"
       >
         {% if project.image %}
-        <div class="relative group">
+        <div class="relative group overflow-hidden">
           <img
             src="{{ project.image.url }}"
             alt="{{ project.title }}"
-            class="w-full h-48 object-cover"
+            class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
             loading="lazy"
             decoding="async"
           />
           <div
-            class="absolute inset-0 h-48 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6"
           >
-            <div class="text-white text-center space-x-4">
+            <div class="flex gap-4">
               {% if project.github_link %}
               <a
                 href="{{ project.github_link }}"
                 target="_blank"
-                class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
+                class="bg-white/90 hover:bg-white text-gray-900 px-5 py-2.5 rounded-lg font-semibold transition-all btn-hover shadow-lg"
               >
                 <i class="fab fa-github mr-2"></i>Code
               </a>
@@ -41,7 +55,7 @@
               <a
                 href="{{ project.live_link }}"
                 target="_blank"
-                class="inline-block bg-white/20 px-4 py-2 rounded hover:bg-white/30 transition"
+                class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-all btn-hover shadow-lg"
               >
                 <i class="fas fa-external-link-alt mr-2"></i>Live
               </a>
@@ -51,29 +65,32 @@
         </div>
         {% else %}
         <div
-          class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-300"
+          class="w-full h-56 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center"
         >
-          <i class="fas fa-code fa-3x"></i>
+          <i class="fas fa-code text-6xl text-gray-400 dark:text-gray-500"></i>
         </div>
         {% endif %}
 
         <div class="p-6 flex-grow flex flex-col">
-          <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
             {{ project.title }}
           </h3>
-          <p class="text-sm text-blue-600 dark:text-blue-400 mb-4 font-medium">
+          <p
+            class="text-sm text-primary-600 dark:text-primary-400 mb-4 font-medium"
+          >
             {{ project.technologies }}
           </p>
-          <p class="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
-            {{ project.description|truncatewords:20 }}
+          <p
+            class="text-gray-600 dark:text-gray-300 mb-6 flex-grow leading-relaxed"
+          >
+            {{ project.description }}
           </p>
-
-          <div class="flex space-x-4 mt-auto">
+          <div class="flex gap-3 mt-auto">
             {% if project.github_link %}
             <a
               href="{{ project.github_link }}"
               target="_blank"
-              class="flex-1 text-center bg-gray-800 text-white py-2 rounded hover:bg-gray-700 transition"
+              class="flex-1 text-center bg-gray-900 dark:bg-gray-700 text-white py-2.5 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-all btn-hover font-medium"
             >
               <i class="fab fa-github mr-2"></i>Code
             </a>
@@ -81,7 +98,7 @@
             <a
               href="{{ project.live_link }}"
               target="_blank"
-              class="flex-1 text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+              class="flex-1 text-center bg-primary-600 text-white py-2.5 rounded-lg hover:bg-primary-700 transition-all btn-hover font-medium"
             >
               <i class="fas fa-external-link-alt mr-2"></i>Live
             </a>
@@ -90,13 +107,16 @@
         </div>
       </div>
       {% empty %}
-      <div class="col-span-full text-center py-12">
-        <p class="text-gray-500 dark:text-gray-400 text-xl">
+      <div class="col-span-full text-center py-20">
+        <i
+          class="fas fa-folder-open text-6xl text-gray-300 dark:text-gray-600 mb-6"
+        ></i>
+        <p class="text-gray-500 dark:text-gray-400 text-2xl font-semibold">
           No projects added yet. Check back soon!
         </p>
       </div>
       {% endfor %}
     </div>
   </div>
-</div>
+</section>
 {% endblock %}

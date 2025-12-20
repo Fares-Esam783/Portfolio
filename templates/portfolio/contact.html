@@ -1,80 +1,187 @@
 {% extends 'base.html' %} {% block content %}
-<div
-  class="py-12 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors"
-  data-aos="fade-up"
+<!-- Contact Hero Section -->
+<section
+  class="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-700 relative overflow-hidden"
 >
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      <div class="bg-blue-600 p-8 text-center">
-        <h1 class="text-3xl font-bold text-white mb-2">Get In Touch</h1>
-        <p class="text-blue-100">
-          Have a project in mind or just want to say hi? Send me a message!
-        </p>
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <svg width="100%" height="100%">
+      <pattern
+        id="hero-grid"
+        width="30"
+        height="30"
+        patternUnits="userSpaceOnUse"
+      >
+        <circle cx="15" cy="15" r="1.5" fill="white" />
+      </pattern>
+      <rect width="100%" height="100%" fill="url(#hero-grid)" />
+    </svg>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6">
+        Get In Touch
+      </h1>
+      <p class="text-xl md:text-2xl text-primary-100 max-w-3xl mx-auto">
+        Have a project in mind or just want to say hi? Send me a message and
+        I'll get back to you as soon as possible!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <!-- Contact Form -->
+      <div class="lg:col-span-3" data-aos="fade-right">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl shadow-large p-8 border border-gray-100 dark:border-gray-700"
+        >
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            Send Me a Message
+          </h2>
+          <form method="post" class="space-y-6">
+            {% csrf_token %} {% for field in form %}
+            <div>
+              <label
+                for="{{ field.id_for_label }}"
+                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >
+                {{ field.label }}
+              </label>
+              {{ field }} {% if field.errors %}
+              <p
+                class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center"
+              >
+                <i class="fas fa-exclamation-circle mr-2"></i>{{ field.errors.0
+                }}
+              </p>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            <button
+              type="submit"
+              class="w-full bg-primary-600 text-white font-bold py-4 rounded-lg hover:bg-primary-700 transition-all btn-hover shadow-md hover:shadow-lg text-lg"
+            >
+              <i class="fas fa-paper-plane mr-2"></i>Send Message
+            </button>
+          </form>
+        </div>
       </div>
 
-      <div class="p-8">
-        <form method="post" class="space-y-6">
-          {% csrf_token %} {% for field in form %}
-          <div>
-            <label
-              for="{{ field.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >
-              {{ field.label }}
-            </label>
-            {{ field }} {% if field.errors %}
-            <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
-            {% endif %}
+      <!-- Contact Info -->
+      <div class="lg:col-span-2" data-aos="fade-left">
+        <div
+          class="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-gray-600"
+        >
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Contact Information
+          </h3>
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 rounded-lg bg-primary-600 flex items-center justify-center text-white mr-4 flex-shrink-0"
+              >
+                <i class="fas fa-envelope text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1"
+                >
+                  Email
+                </p>
+                <a
+                  href="mailto:faresesam7589@gmail.com"
+                  class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
+                >
+                  faresesam7589@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 rounded-lg bg-green-600 flex items-center justify-center text-white mr-4 flex-shrink-0"
+              >
+                <i class="fab fa-whatsapp text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1"
+                >
+                  WhatsApp
+                </p>
+                <a
+                  href="https://wa.me/01210806085"
+                  target="_blank"
+                  class="text-green-600 dark:text-green-400 font-semibold hover:underline"
+                >
+                  +20 121 080 6085
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 rounded-lg bg-gray-900 dark:bg-gray-600 flex items-center justify-center text-white mr-4 flex-shrink-0"
+              >
+                <i class="fab fa-github text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1"
+                >
+                  GitHub
+                </p>
+                <a
+                  href="https://github.com/Fares-Esam783"
+                  target="_blank"
+                  class="text-gray-900 dark:text-gray-300 font-semibold hover:underline"
+                >
+                  Fares-Esam783
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center text-white mr-4 flex-shrink-0"
+              >
+                <i class="fab fa-linkedin text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1"
+                >
+                  LinkedIn
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/fares-esam-a38172343/"
+                  target="_blank"
+                  class="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                >
+                  Fares Esam
+                </a>
+              </div>
+            </div>
           </div>
-          {% endfor %}
 
-          <button
-            type="submit"
-            class="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 transition duration-300 shadow-md"
-          >
-            Send Message
-          </button>
-        </form>
-
-        <div class="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
-          <div class="flex justify-center space-x-8">
-            <div class="text-center">
-              <i
-                class="fas fa-envelope text-blue-600 text-2xl mb-2"
-                data-aos="zoom-in"
-              ></i>
-              <p class="text-sm text-gray-600">Email Me</p>
-            </div>
-            <div class="text-center">
-              <i
-                class="fab fa-linkedin text-blue-600 text-2xl mb-2"
-                data-aos="zoom-in"
-                data-aos-delay="100"
-              ></i>
-              <p class="text-sm text-gray-600">LinkedIn</p>
-            </div>
-            <div class="text-center">
-              <i
-                class="fab fa-github text-blue-600 text-2xl mb-2"
-                data-aos="zoom-in"
-                data-aos-delay="200"
-              ></i>
-              <p class="text-sm text-gray-600">GitHub</p>
-            </div>
-            <div class="text-center">
-              <a href="https://wa.me/01210806085" target="_blank" rel="noopener">
-                <i class="fab fa-whatsapp text-green-600 text-2xl mb-2" data-aos="zoom-in" data-aos-delay="300"></i>
-              </a>
-              <p class="text-sm text-gray-600">WhatsApp</p>
-            </div>
+          <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-600">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <i class="fas fa-clock mr-2"></i>Response Time: Usually within 24
+              hours
+            </p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <i class="fas fa-map-marker-alt mr-2"></i>Location: Egypt
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 {% endblock %}
