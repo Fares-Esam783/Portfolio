@@ -2,24 +2,31 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
 
 # Django
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+*.pot
 
+# Database
+*.sqlite3
+*.db
 
-
-# Static collected (if you run collectstatic)
-# static/ 
-staticfiles/
-node_modules/
-
-# Environments
+# Environment Variables (CRITICAL - Never commit!)
 .env
 .env.*
 .python-version
+
+# Virtual Environments
 .venv
 env/
 venv/
@@ -27,23 +34,53 @@ ENV/
 env.bak/
 venv.bak/
 
+# Static Files
+staticfiles/
+static_root/
+# Uncomment if you don't want to track static source files:
+# static/
+
+# Media Files (User Uploads)
+# Uncomment to exclude media files from Git:
+# media/
+
+# Node.js (for Tailwind/frontend tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
 # IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# OS
+# OS Files
 .DS_Store
 Thumbs.db
+desktop.ini
 
+# Testing & Coverage
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 coverage.xml
-site/
 htmlcov/
-*.sqlite3
-*.db
+.tox/
+.hypothesis/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Temporary Files
 *.tmp
+*.bak
+*.swp
+*~
+
+# PythonAnywhere Specific
+# Add any PythonAnywhere-specific files here if needed
