@@ -38,19 +38,19 @@ const pageVariants: Variants = {
 
 const overlayVariants: Variants = {
   initial: {
-    scaleY: 0,
+    scaleY: 1,
     originY: 0,
   },
   animate: {
-    scaleY: 1,
+    scaleY: 0,
     transition: {
       duration: 0.5,
       ease: easeInOut,
     },
   },
   exit: {
-    scaleY: 0,
-    originY: 0,
+    scaleY: 1,
+    originY: 1,
     transition: {
       duration: 0.5,
       ease: easeInOut,
