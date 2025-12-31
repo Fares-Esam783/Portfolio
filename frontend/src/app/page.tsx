@@ -1300,7 +1300,7 @@ export default function HomePage() {
                         }}
                       >
                         <img
-                          src={education[eduIndex].logo_url}
+                          src={education[eduIndex].logo_url || ""}
                           alt={education[eduIndex].institution}
                           style={{
                             width: "80%",
@@ -1614,7 +1614,7 @@ export default function HomePage() {
                         }}
                       >
                         <img
-                          src={certifications[certIndex].image_url}
+                          src={certifications[certIndex].image_url || ""}
                           alt={certifications[certIndex].name}
                           style={{
                             width: "85%",
