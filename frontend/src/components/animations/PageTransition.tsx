@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants, easeInOut } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -20,7 +20,7 @@ const pageVariants: Variants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
       when: "beforeChildren",
       staggerChildren: 0.1,
     },
@@ -31,29 +31,29 @@ const pageVariants: Variants = {
     scale: 0.98,
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
     },
   },
 };
 
 const overlayVariants: Variants = {
   initial: {
-    scaleY: 1,
+    scaleY: 0,
     originY: 0,
   },
   animate: {
-    scaleY: 0,
+    scaleY: 1,
     transition: {
-      duration: 0.8,
-      ease: [0.76, 0, 0.24, 1] as const,
+      duration: 0.5,
+      ease: easeInOut,
     },
   },
   exit: {
-    scaleY: 1,
-    originY: 1,
+    scaleY: 0,
+    originY: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.76, 0, 0.24, 1] as const,
+      duration: 0.5,
+      ease: easeInOut,
     },
   },
 };
@@ -123,7 +123,7 @@ export const fadeUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
     },
   },
 };
@@ -153,7 +153,7 @@ export const scaleUp: Variants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
     },
   },
 };
@@ -169,7 +169,7 @@ export const slideInLeft: Variants = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
     },
   },
 };
@@ -185,7 +185,7 @@ export const slideInRight: Variants = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: easeInOut,
     },
   },
 };
