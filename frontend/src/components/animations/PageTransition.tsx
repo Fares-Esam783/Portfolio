@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -8,7 +8,7 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: {
     opacity: 0,
     y: 20,
@@ -20,7 +20,7 @@ const pageVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
       when: "beforeChildren",
       staggerChildren: 0.1,
     },
@@ -31,12 +31,12 @@ const pageVariants = {
     scale: 0.98,
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
-const overlayVariants = {
+const overlayVariants: Variants = {
   initial: {
     scaleY: 1,
     originY: 0,
@@ -45,7 +45,7 @@ const overlayVariants = {
     scaleY: 0,
     transition: {
       duration: 0.8,
-      ease: [0.76, 0, 0.24, 1],
+      ease: [0.76, 0, 0.24, 1] as const,
     },
   },
   exit: {
@@ -53,7 +53,7 @@ const overlayVariants = {
     originY: 1,
     transition: {
       duration: 0.6,
-      ease: [0.76, 0, 0.24, 1],
+      ease: [0.76, 0, 0.24, 1] as const,
     },
   },
 };
@@ -102,7 +102,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
 }
 
 // Stagger container for child animations
-export const staggerContainer = {
+export const staggerContainer: Variants = {
   initial: {},
   animate: {
     transition: {
@@ -113,7 +113,7 @@ export const staggerContainer = {
 };
 
 // Fade up animation for individual elements
-export const fadeUp = {
+export const fadeUp: Variants = {
   initial: {
     opacity: 0,
     y: 30,
@@ -123,13 +123,13 @@ export const fadeUp = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 // Fade in animation
-export const fadeIn = {
+export const fadeIn: Variants = {
   initial: {
     opacity: 0,
   },
@@ -143,7 +143,7 @@ export const fadeIn = {
 };
 
 // Scale up animation
-export const scaleUp = {
+export const scaleUp: Variants = {
   initial: {
     opacity: 0,
     scale: 0.8,
@@ -153,13 +153,13 @@ export const scaleUp = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 // Slide in from left
-export const slideInLeft = {
+export const slideInLeft: Variants = {
   initial: {
     opacity: 0,
     x: -60,
@@ -169,13 +169,13 @@ export const slideInLeft = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 // Slide in from right
-export const slideInRight = {
+export const slideInRight: Variants = {
   initial: {
     opacity: 0,
     x: 60,
@@ -185,7 +185,7 @@ export const slideInRight = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };

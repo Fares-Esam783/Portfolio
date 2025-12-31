@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useInView, useAnimation, Variants } from "framer-motion";
 
 interface TextRevealProps {
   children: string;
@@ -32,7 +32,7 @@ export default function TextReveal({
 
   const words = children.split(" ");
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -42,7 +42,7 @@ export default function TextReveal({
     },
   };
 
-  const wordVariants = {
+  const wordVariants: Variants = {
     hidden: {
       y: "100%",
       opacity: 0,
@@ -52,7 +52,7 @@ export default function TextReveal({
       opacity: 1,
       transition: {
         duration: duration,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };
@@ -102,7 +102,7 @@ export function CharReveal({
 
   const chars = children.split("");
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -112,7 +112,7 @@ export function CharReveal({
     },
   };
 
-  const charVariants = {
+  const charVariants: Variants = {
     hidden: {
       y: 50,
       opacity: 0,
@@ -124,7 +124,7 @@ export function CharReveal({
       rotateX: 0,
       transition: {
         duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };
@@ -178,7 +178,7 @@ export function LineReveal({
 
   const lines = children.split("\n");
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -188,7 +188,7 @@ export function LineReveal({
     },
   };
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: {
       y: 30,
       opacity: 0,
@@ -198,7 +198,7 @@ export function LineReveal({
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };
