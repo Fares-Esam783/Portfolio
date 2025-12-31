@@ -468,108 +468,106 @@ export default function HomePage() {
           }}
         >
           {/* Profile Photo with Animated Ring */}
-          {personalInfo?.profile_photo_url && (
-            <motion.div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: 56,
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div style={{ position: "relative" }}>
-                {/* Animated Rings */}
+          <motion.div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: 56,
+            }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div style={{ position: "relative" }}>
+              {/* Animated Rings */}
+              <motion.div
+                style={{
+                  position: "absolute",
+                  inset: -20,
+                  border: "2px solid rgba(139, 92, 246, 0.3)",
+                  borderRadius: "50%",
+                }}
+                animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+                transition={{
+                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 3, repeat: Infinity },
+                }}
+              />
+              <motion.div
+                style={{
+                  position: "absolute",
+                  inset: -40,
+                  border: "1px solid rgba(99, 102, 241, 0.2)",
+                  borderRadius: "50%",
+                }}
+                animate={{ rotate: -360 }}
+                transition={{
+                  duration: 30,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+
+              {/* Glow */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: -24,
+                  background:
+                    "linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(99, 102, 241, 0.4))",
+                  borderRadius: "50%",
+                  filter: "blur(40px)",
+                }}
+              />
+
+              {/* Floating Photo - Static Image */}
+              <motion.img
+                src="/profile.jpg"
+                alt={personalInfo?.name || "Fares Essam"}
+                style={{
+                  position: "relative",
+                  width: 180,
+                  height: 180,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "4px solid rgba(255,255,255,0.1)",
+                  boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
+                }}
+                animate={{ y: [0, -12, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Orbiting Dots */}
+              {[...Array(4)].map((_, i) => (
                 <motion.div
+                  key={i}
                   style={{
                     position: "absolute",
-                    inset: -20,
-                    border: "2px solid rgba(139, 92, 246, 0.3)",
+                    width: 6 + i * 2,
+                    height: 6 + i * 2,
                     borderRadius: "50%",
+                    background: i % 2 === 0 ? "#8b5cf6" : "#6366f1",
+                    boxShadow: `0 0 10px ${
+                      i % 2 === 0 ? "#8b5cf6" : "#6366f1"
+                    }`,
+                    top: "50%",
+                    left: "50%",
+                    transformOrigin: `${-60 - i * 15}px 0`,
                   }}
-                  animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+                  animate={{ rotate: 360 }}
                   transition={{
-                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity },
-                  }}
-                />
-                <motion.div
-                  style={{
-                    position: "absolute",
-                    inset: -40,
-                    border: "1px solid rgba(99, 102, 241, 0.2)",
-                    borderRadius: "50%",
-                  }}
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 30,
+                    duration: 6 + i * 2,
                     repeat: Infinity,
                     ease: "linear",
                   }}
                 />
-
-                {/* Glow */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: -24,
-                    background:
-                      "linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(99, 102, 241, 0.4))",
-                    borderRadius: "50%",
-                    filter: "blur(40px)",
-                  }}
-                />
-
-                {/* Floating Photo */}
-                <motion.img
-                  src={personalInfo.profile_photo_url}
-                  alt={personalInfo.name}
-                  style={{
-                    position: "relative",
-                    width: 180,
-                    height: 180,
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    border: "4px solid rgba(255,255,255,0.1)",
-                    boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
-                  }}
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-
-                {/* Orbiting Dots */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    style={{
-                      position: "absolute",
-                      width: 6 + i * 2,
-                      height: 6 + i * 2,
-                      borderRadius: "50%",
-                      background: i % 2 === 0 ? "#8b5cf6" : "#6366f1",
-                      boxShadow: `0 0 10px ${
-                        i % 2 === 0 ? "#8b5cf6" : "#6366f1"
-                      }`,
-                      top: "50%",
-                      left: "50%",
-                      transformOrigin: `${-60 - i * 15}px 0`,
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 6 + i * 2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
+              ))}
+            </div>
+          </motion.div>
 
           {/* Status Badge */}
           <motion.div
